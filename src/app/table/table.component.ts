@@ -7,17 +7,24 @@ import { faEdit } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
-  styleUrls: ['./table.component.css']
+  styleUrls: ['./table.component.css'],
 })
 export class TableComponent implements OnInit {
   //  used fontawesome icon for edit and delete
   Icon = faTrash;
   faedit = faEdit;
 
-  dataSource: any[] = []
+  dataSource: any[] = [];
   // dataLet=any[]
-  
-  displayedColumns: string[] = ['id', 'task', 'date', 'status', 'description', 'actions'];
+
+  displayedColumns: string[] = [
+    'id',
+    'task',
+    'date',
+    'status',
+    'description',
+    'actions',
+  ];
   dataLet: any[] = [];
 
   // totalData!: number;
@@ -27,11 +34,9 @@ export class TableComponent implements OnInit {
   // pendingValue!: number;
   // notStartedData!: any[];
   // notStartedValue!: number;
-  constructor(private _dialog: MatDialog) {
-
-  }
+  constructor(private _dialog: MatDialog) {}
   ngOnInit(): void {
-    this.loadDataFromLocalStorage()
+    this.loadDataFromLocalStorage();
     // console.log(this.dataSource)
   }
 
@@ -41,23 +46,24 @@ export class TableComponent implements OnInit {
       this.dataSource = JSON.parse(storedData);
     }
   }
-  openDialog() {
+  openDialog(element = null) {
     const dialogRef = this._dialog.open(DialogComponent, {
-      
+      data: element
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      // console.log(result,'hii abhi')
-      this.dataSource = [...this.dataSource, result]
-      // console.log(this.dataSource)
-      localStorage.setItem('formData', JSON.stringify([...this.dataSource]));
-      // this.filterValues(this.dataSource);
-      this.dataLet = [...this.dataSource];
-      // console.log(result,'hii abhi')
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(result, 'hii abhi');
+      if (result) {
+        this.dataSource = [...this.dataSource, result];
+        // console.log(this.dataSource)
+        localStorage.setItem('formData', JSON.stringify([...this.dataSource]));
+        // this.filterValues(this.dataSource);
+        this.dataLet = [...this.dataSource];
+        // console.log(result,'hii abhi')
+      }
     });
-    
   }
-  // Function to filter the data from the table 
+  // Function to filter the data from the table
   // filterData(key: string) {
   //   this.loadDataFromLocalStorage();
   //   const filterValue = this.dataSource.filter((value) => {
@@ -90,34 +96,24 @@ export class TableComponent implements OnInit {
   saveToLocalStorage() {
     localStorage.setItem('formData', JSON.stringify(this.dataSource));
   }
-  // Function to delete the row from the table 
+  // Function to delete the row from the table
   deleteItem(id: number) {
     this.dataSource = this.dataSource.filter((item) => item.id !== id);
     this.saveToLocalStorage();
   }
 
-  
   // function to update the table's vlaues
   updateItem(id: number) {
-   
     for (let i = 0; i < this.dataSource.length; i++) {
-      if ((this.dataSource[i].id)) {
-        
+      if (this.dataSource[i].id) {
         const dialogData = this._dialog.open(DialogComponent, {
           data: {
-            
             updateItem: this.dataSource,
-            indexOfData: i
-          }
-          
+            indexOfData: i,
+          },
         });
-    
-        
       }
     }
     // console.log(,'hii abhi')
   }
 }
-
-
-
