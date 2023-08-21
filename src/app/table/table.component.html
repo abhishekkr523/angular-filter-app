@@ -1,0 +1,78 @@
+<div class="table-container">
+  <div class="table">
+    <div class="table-header">
+      <input type="search" placeholder="Search here" name="" id="">
+      <button class="dialog" (click)=" openDialog()">Add </button>
+    </div>
+
+    <!-- Filters for the status value  -->
+    <!-- <mat-card class="filters">
+      <button mat-button (click)="filterData('total')">
+        <mat-card class="card-filter blue">
+          <h2>{{totalData}}</h2>
+          <h2>Total Tasks</h2>
+        </mat-card>
+      </button>
+      <button mat-button (click)="filterData('Completed')">
+        <mat-card class="card-filter green">
+          <h2>{{completedValue}}</h2>
+          <h2>Completed Tasks</h2>
+        </mat-card>
+      </button>
+      <button mat-button (click)="filterData('Pending')">
+        <mat-card class="card-filter orange">
+          <h2>{{pendingValue}}</h2>
+          <h2>Pending Tasks</h2>
+        </mat-card>
+      </button>
+      <button mat-button (click)="filterData('Not Started')">
+        <mat-card class="card-filter red">
+          <h2>{{notStartedValue}}</h2>
+          <h2>Not Started</h2>
+        </mat-card>
+      </button>
+    </mat-card> -->
+
+
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> Id </th>
+        <td mat-cell *matCellDef="let element"> <span *ngIf=" element&&element.id"> {{element.id}}</span>
+        <td>
+      </ng-container>
+
+      <ng-container matColumnDef="task">
+        <th mat-header-cell *matHeaderCellDef> Task</th>
+        <td mat-cell *matCellDef="let element"> {{element?.task}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef> Date </th>
+        <td mat-cell *matCellDef="let element"> {{element?.date|date}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef> Status </th>
+        <td mat-cell *matCellDef="let element"> {{element?.status}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef> Description </th>
+        <td mat-cell *matCellDef="let element"> {{element?.description}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef> Actions </th>
+        <td mat-cell *matCellDef="let element" class="icon">
+          <button class="action-button fas fa-pen" mat-button color="primary" (click)="updateItem(element.id)"><fa-icon
+              [icon]="faedit"></fa-icon></button>
+          <button class="action-button fas fa-trash-alt" mat-button color="warn"
+            (click)="deleteItem(element.id)"><fa-icon [icon]="Icon"></fa-icon></button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+</div>

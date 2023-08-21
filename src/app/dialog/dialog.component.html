@@ -1,0 +1,45 @@
+<div class="title">
+    <h1 mat-dialog-title class="content"> <b>Add the information about your task</b> </h1>
+    <hr>
+</div>
+<form id="dataForm" [formGroup]="formData">
+    <div mat-dialog-content>
+        <div class="row">
+            <mat-form-field>
+                <mat-label>ID</mat-label>
+                <input matInput placeholder="Ex. 123" id="input--id" formControlName="id" name="id">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Task Title</mat-label>
+                <input matInput placeholder="Ex. Learn Github" id="input-title" formControlName="task" name="task">
+            </mat-form-field>
+        </div>
+        <div class="row">
+            <mat-form-field>
+                <mat-label>Choose a date</mat-label>
+                <input formControlName="date" name="date" matInput [matDatepicker]="picker">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Select Status</mat-label>
+                <mat-select formControlName="status" name="status" required>
+                    <mat-option id="input-status" *ngFor="let val of statuses" [value]="val">
+                        {{val}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <mat-form-field>
+            <mat-label>Task Description</mat-label>
+            <textarea id="input-desc" matInput placeholder="Ex. In this task you have to..."
+                formControlName="description" name="description"></textarea>
+        </mat-form-field><br>
+    </div>
+    <div mat-dialog-actions class="btn">
+        <button mat-raised-button mat-dialog-close>Close</button>
+        <button mat-raised-button color="primary" type="submit" (click)="onFormSubmit()">Submit</button>
+    </div>
+</form>
+
