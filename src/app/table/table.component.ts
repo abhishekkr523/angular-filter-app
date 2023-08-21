@@ -34,7 +34,7 @@ export class TableComponent implements OnInit {
   // pendingValue!: number;
   // notStartedData!: any[];
   // notStartedValue!: number;
-  constructor(private _dialog: MatDialog) {}
+  constructor(private _dialog: MatDialog) { }
   ngOnInit(): void {
     this.loadDataFromLocalStorage();
     // console.log(this.dataSource)
@@ -46,7 +46,7 @@ export class TableComponent implements OnInit {
       this.dataSource = JSON.parse(storedData);
     }
   }
-  openDialog(element = null) {
+  openDialog(element = null, index = null) {
     const dialogRef = this._dialog.open(DialogComponent, {
       data: element
     });
@@ -54,12 +54,21 @@ export class TableComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       console.log(result, 'hii abhi');
       if (result) {
-        this.dataSource = [...this.dataSource, result];
-        // console.log(this.dataSource)
+        if (index) {
+          this.dataSource[index] = result
+        } else {
+          this.dataSource = [...this.dataSource, result];
+        }
+        console.log(this.dataSource)
         localStorage.setItem('formData', JSON.stringify([...this.dataSource]));
         // this.filterValues(this.dataSource);
         this.dataLet = [...this.dataSource];
         // console.log(result,'hii abhi')
+
+        const storedData = localStorage.getItem('formData');
+        if (storedData) {
+          this.dataSource = JSON.parse(storedData);
+        }
       }
     });
   }

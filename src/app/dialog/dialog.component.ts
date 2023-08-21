@@ -25,11 +25,11 @@ export class DialogComponent {
         console.log(data,'for editable');
         
     this.formData = this._fb.group({
-      id: data?.tableData.id||'',
-      task:data?.tableData.task|| '',
-      date:data?.tableData.date|| '',
-      status:data?.tableData.status|| '',
-      description:data?.tableData.description|| ''
+      id: data?.id||'',
+      task:data?.task|| '',
+      date:data?.date|| '',
+      status:data?.status|| '',
+      description:data?.description|| ''
     })
   }
 
