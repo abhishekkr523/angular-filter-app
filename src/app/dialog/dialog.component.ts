@@ -18,18 +18,23 @@ export class DialogComponent {
   formData: FormGroup;
 
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data:any, private _fb: FormBuilder, private _dialog: MatDialog, public dialogRef: MatDialogRef<TableComponent>) {
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data:any,
+     private _fb: FormBuilder, private _dialog: MatDialog,
+      public dialogRef: MatDialogRef<TableComponent>) {
+        console.log(data,'for editable');
+        
     this.formData = this._fb.group({
-      id: '',
-      task: '',
-      date: '',
-      status: '',
-      description: ''
+      id: data?.id||'',
+      task:data?.task|| '',
+      date:data?.date|| '',
+      status:data?.status|| '',
+      description:data?.description|| ''
     })
   }
 
   onFormSubmit() {
-    // console.log(this.formData.value);
+    console.log(this.formData.value);
     if (this.formData.valid) {
       this.dialogRef.close(
         this.formData.value
