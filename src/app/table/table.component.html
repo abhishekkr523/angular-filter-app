@@ -1,37 +1,43 @@
 <div class="table-container">
   <div class="table">
-    <div class="table-header">
-      <input type="search" placeholder="Search here" name="" id="">
-      <button class="dialog" (click)=" openDialog()">Add </button>
+    <div class="filters">
+      <button (click)="filterData('total')">
+        <mat-card class="card-filter blue">
+          <h2 class="paira">{{ dataSource.length }}</h2> <!-- Display the total task count -->
+          <p class="paira">Total Tasks</p>
+        </mat-card>
+      </button>
+      <button (click)="filterData('Completed')">
+        <mat-card class="card-filter green">
+          <h2 class="paira">{{ completedValue }}</h2> <!-- Display the completed task count -->
+          <p class="paira">Completed Tasks</p>
+        </mat-card>
+      </button>
+      <button (click)="filterData('Pending')">
+        <mat-card class="card-filter orange">
+          <h2 class="paira">{{ pendingValue }}</h2> <!-- Display the pending task count -->
+          <p class="paira">Pending Tasks</p>
+        </mat-card>
+      </button>
+      <button (click)="filterData('Not Started')">
+        <mat-card class="card-filter red">
+          <h2 class="paira">{{ inprogressValue }}</h2> <!-- Display the in-progress task count -->
+          <p class="paira">Inprogress</p>
+        </mat-card>
+      </button>
     </div>
 
-    <!-- Filters for the status value  -->
-    <!-- <mat-card class="filters">
-      <button mat-button (click)="filterData('total')">
-        <mat-card class="card-filter blue">
-          <h2>{{totalData}}</h2>
-          <h2>Total Tasks</h2>
-        </mat-card>
-      </button>
-      <button mat-button (click)="filterData('Completed')">
-        <mat-card class="card-filter green">
-          <h2>{{completedValue}}</h2>
-          <h2>Completed Tasks</h2>
-        </mat-card>
-      </button>
-      <button mat-button (click)="filterData('Pending')">
-        <mat-card class="card-filter orange">
-          <h2>{{pendingValue}}</h2>
-          <h2>Pending Tasks</h2>
-        </mat-card>
-      </button>
-      <button mat-button (click)="filterData('Not Started')">
-        <mat-card class="card-filter red">
-          <h2>{{notStartedValue}}</h2>
-          <h2>Not Started</h2>
-        </mat-card>
-      </button>
-    </mat-card> -->
+
+    <div class="table-header">
+      <div class="left"></div>
+      <div class="right">
+        <button class="dialog" mat-raised-button (click)=" openDialog()">
+          <p>+ Add Task</p>
+        </button>
+        <input type="search" placeholder="Search.." id="">
+      </div>
+    </div>
+
 
 
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
@@ -46,6 +52,15 @@
         <td mat-cell *matCellDef="let element"> {{element?.task}} </td>
       </ng-container>
 
+      <ng-container matColumnDef="assignto">
+        <th mat-header-cell *matHeaderCellDef> AssignedBy </th>
+        <td mat-cell *matCellDef="let element">
+          <mat-chip>
+            <img matChipAvatar src="img.png" style="height: 30px;width: 40px;border-radius: 50%;" />
+            {{ element?.assignto }}
+          </mat-chip>
+        </td>
+      </ng-container>
       <ng-container matColumnDef="date">
         <th mat-header-cell *matHeaderCellDef> Date </th>
         <td mat-cell *matCellDef="let element"> {{element?.date|date}} </td>
@@ -53,13 +68,14 @@
 
       <ng-container matColumnDef="status">
         <th mat-header-cell *matHeaderCellDef> Status </th>
-        <td mat-cell *matCellDef="let element"> {{element?.status}} </td>
+        <td mat-cell *matCellDef="let element" >
+          <mat-chip [ngClass]="getStatusClass(element?.status)">
+            {{element?.status}}
+          </mat-chip>
+        </td>
       </ng-container>
 
-      <ng-container matColumnDef="description">
-        <th mat-header-cell *matHeaderCellDef> Description </th>
-        <td mat-cell *matCellDef="let element"> {{element?.description}} </td>
-      </ng-container>
+
 
       <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef> Actions </th>

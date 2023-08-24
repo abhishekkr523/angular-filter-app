@@ -12,23 +12,47 @@
 }
 
 .toolBar {
-  width: 70vw;
-  height: 15vh;
-  background-color: #c7d6ee;
-  border-radius: 10px;
+  width: 60vw;
+  height: 13vh;
+  background-color: #d7e1f2;
+  /* border-radius: 10px; */
   margin-top: 30px;
+  border-radius: 4px;
+}
+.toolbar-text{
+  height: 10vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 span {
-  font-size: 30px;
+  font-size: 18px;
 }
-
+.toolbar-right{
+  height: 3vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .img {
   height: 100px;
-  width: 100px;
-  background-image: url("oip.png");
-  background-size: cover;
+  width: 175px;
+  background-image: url("img.png");
+  background-size: contain;
+  background-position: center;
   background-position: center;
   background-repeat: no-repeat;
-
+  /* margin-bottom: 3px; */
+  
+}
+p{
+font-size: 13px;
+margin-right: 10px;
+color: #787b80;
+}
+li{
+  font-size: 13px;
+  color: #787b80;
 }

@@ -10,34 +10,36 @@ import { faEdit } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./table.component.css'],
 })
 export class TableComponent implements OnInit {
+
   //  used fontawesome icon for edit and delete
   Icon = faTrash;
   faedit = faEdit;
 
   dataSource: any[] = [];
-  // dataLet=any[]
 
   displayedColumns: string[] = [
     'id',
     'task',
-    'date',
+    'assignto',
     'status',
-    'description',
+    'date',
     'actions',
   ];
+
   dataLet: any[] = [];
 
-  // totalData!: number;
-  // completedData!: any[];
-  // completedValue!: number;
-  // pendingData!: any[];
-  // pendingValue!: number;
-  // notStartedData!: any[];
-  // notStartedValue!: number;
+  totalData!: number;
+  completedData!: any[];
+  completedValue!: number;
+  pendingData!: any[];
+  pendingValue!: number;
+  inprogressData!: any[];
+  inprogressValue!: number;
+
   constructor(private _dialog: MatDialog) { }
   ngOnInit(): void {
     this.loadDataFromLocalStorage();
-    // console.log(this.dataSource)
+    this.calculateTaskCounts();
   }
 
   loadDataFromLocalStorage() {
@@ -73,33 +75,51 @@ export class TableComponent implements OnInit {
     });
   }
   // Function to filter the data from the table
-  // filterData(key: string) {
-  //   this.loadDataFromLocalStorage();
-  //   const filterValue = this.dataSource.filter((value) => {
-  //     return value.status == key;
-  //   });
-  //   this.dataSource = [...filterValue];
-  //   if (key == 'total') {
-  //     this.dataSource = this.dataLet;
-  //   }
-  // }
+  filterData(key: string) {
+    if (key === 'total') {
+      this.dataSource = this.dataLet; // Show all tasks for "Total Tasks" filter
+    } else {
+      this.loadDataFromLocalStorage();
+
+      const filterValue = this.dataSource.filter((value) => {
+        return value.status == key;
+      });
+      this.dataSource = [...filterValue];
+    }
+
+    this.calculateTaskCounts(); // Call the method to recalculate task counts
+  }
 
   // Function to print the number of every filter value
-  // filterValues(data: any[]) {
-  //   this.totalData = data.length;
-  //   this.completedData = data.filter((data) => {
-  //     return data.status == "Completed";
-  //   });
-  //   this.completedValue = this.completedData.length;
-  //   this.pendingData = data.filter((data) => {
-  //     return data.status == "Pending";
-  //   });
-  //   this.pendingValue = this.pendingData.length;
-  //   this.notStartedData = data.filter((data) => {
-  //     return data.status == "Not Started";
-  //   });
-  //   this.notStartedValue = this.notStartedData.length;
-  // }
+  filterValues(data: any[]) {
+    this.totalData = data.length;
+    this.completedData = data.filter((data) => {
+      // console.log(this.completedData)
+      return data.status == "Completed";
+
+    });
+    // console.log(this.completedData)
+    this.completedValue = this.completedData.length;
+    this.pendingData = data.filter((data) => {
+      return data.status == "Pending";
+    });
+    this.pendingValue = this.pendingData.length;
+    this.inprogressData = data.filter((data) => {
+      return data.status == "Not Started";
+    });
+    this.inprogressValue = this.inprogressData.length;
+  }
+
+
+  private calculateTaskCounts() {
+    this.totalData = this.dataSource.length;
+    this.completedData = this.dataSource.filter((data) => data.status === 'Completed');
+    this.completedValue = this.completedData.length;
+    this.pendingData = this.dataSource.filter((data) => data.status === 'Pending');
+    this.pendingValue = this.pendingData.length;
+    this.inprogressData = this.dataSource.filter((data) => data.status === 'Inprogress');
+    this.inprogressValue = this.inprogressData.length;
+  }
 
   // Function to save data in the localStorage of the dataSource
   saveToLocalStorage() {
@@ -111,18 +131,18 @@ export class TableComponent implements OnInit {
     this.saveToLocalStorage();
   }
 
-  // function to update the table's vlaues
-  updateItem(id: number) {
-    for (let i = 0; i < this.dataSource.length; i++) {
-      if (this.dataSource[i].id) {
-        const dialogData = this._dialog.open(DialogComponent, {
-          data: {
-            updateItem: this.dataSource,
-            indexOfData: i,
-          },
-        });
-      }
+
+
+  getStatusClass(status: string) {
+    switch (status) {
+      case 'Completed':
+        return 'completed-status'; // CSS class name for completed status
+      case 'Inprogress':
+        return 'inprogress-status'; // CSS class name for in-progress status
+      case 'Pending':
+        return 'pending-status'; // CSS class name for pending status
+      default:
+        return '';
     }
-    // console.log(,'hii abhi')
   }
 }

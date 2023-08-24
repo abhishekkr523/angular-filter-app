@@ -14,6 +14,11 @@ export class DialogComponent {
     'Completed',
     'Inprogress'
   ];
+  assigntos:string[]=[
+    'Saurav sir',
+    'Vaibhav sir',
+    'Afsha mam'
+  ];
     
   formData: FormGroup;
 
@@ -27,9 +32,9 @@ export class DialogComponent {
     this.formData = this._fb.group({
       id: data?.id||'',
       task:data?.task|| '',
+      assignto:data?.assignto|| '',
       date:data?.date|| '',
-      status:data?.status|| '',
-      description:data?.description|| ''
+      status:data?.status|| ''
     })
   }
 

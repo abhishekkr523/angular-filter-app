@@ -1,26 +1,4 @@
 /* .table-header {} */
-
-.table-header input {
-    width: 120px;
-    height: 25px;
-    border-radius: 6px;
-}
-
-.table-header button {
-    /* text-align: center; */
-    padding-bottom: 10px;
-    background-color: rgb(244, 243, 241);
-    height: 30px;
-    font-size: 20px;
-    color:orange;
-    border-radius: 4px;
-}
-
-.dialog {
-    margin-left: 90%;
-     margin-top: 10px;
-}
-
 .table-container {
     width: 100%;
     height: auto;
@@ -28,68 +6,163 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    margin-top: 5px;
 }
 
-.table-header {
-    width: 60vw;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+
 
 .table {
-    width: 70vw;
+    width: 58vw;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
+.table-header {
+    width: 60vw;
+    margin-bottom: 5px;
+    display: flex;
+    /* flex-direction: column; */
+    align-items: center;
+    justify-content: space-between;
+}
+
+.table-header input {
+    border: 1px solid black;
+    border-radius: 4px;
+    max-width: 200px;
+    min-width: 118px;
+    height: 30px;
+    margin-right: 25px;
+    border: 1px  solid rgb(238, 230, 230);
+}
+
+.table-header button {
+    padding-bottom: 10px;
+    /* margin-top: 20px; */
+    /* margin-bottom: 10px; */
+    margin-right: 15px;
+    height: 30px;
+    /* width: 10px; */
+    font-size: 13px;
+    color:#ffff;
+    background-color: #71a7ff;
+    text-align: center;
+}
+p{
+    padding-top: 10px;
+}
 
 .filters {
     width: 100%;
-    height: 15vh;
+    height: 16vh;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 30px;
+    margin-bottom: 1px;
+    margin-top: 30px;
 }
 
 .card-filter {
-    width: 180px;
+    /* max-width: 200px;
+    min-width: 118px; */
+    width: 200px;
     height: 80px;
-    font-size: 10px;
+    font-size: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
-
+.paira{
+    line-height: 0px;
+    margin-bottom: 5px;
+}
 .blue {
     background-color: #ebf2fe;
-    color: blue;
+    color: rgb(100, 100, 202);
+    margin-bottom: 20px;
 }
 
 .green {
     background-color: #fef4e4;
-    color: green;
+    color: rgb(210, 179, 24);
+     margin-bottom: 20px;
 }
 
 .orange {
     background-color: #e1fffb;
-    color: orange;
+    color: rgb(13, 205, 218);
+     margin-bottom: 20px;
 }
 
 .red {
     background-color: #ffece9;
-    color: orange;
+    color: rgb(223, 126, 107);
+     margin-bottom: 20px;
 }
 
 button {
-    background-color: aqua;
     background-color: transparent;
     border: none;
 
 }
 .icon{
     display: flex;
-    flex-direction: column;
+    /* flex-direction: column; */
     align-items: center;
     justify-content: center;
+    width: 90px;
 }
+.icon button{
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center;
+    width: 5px;
+
+} 
+/* h2{
+    font-size: 15px;
+    margin-top: 30px;
+} */
+
+/* Define classes for different status colors */
+/* .completed-status {
+    background-color: #4caf50; 
+    color: white;
+    
+  }
+  
+  .inprogress-status {
+    background-color: #ff9800;  
+    color: white;
+  }
+  
+  .pending-status {
+    background-color: #f44336; 
+    color: white;
+  } */
+
+
+
+  /* Define classes for different status colors */
+/* ::ng-deep .completed-status mat-chip {
+    background-color: #4caf50; 
+    color: white;
+  }
+  
+  .inprogress-status mat-chip {
+    background-color: #ff9800; 
+    color: white;
+  }
+  
+  ::ng-deep .pending-status mat-chip {
+    background-color: #f44336; 
+    color: white;
+  } */
+  ::ng-deep .mat-chip-completed-status  {
+    background-color: #4caf50; 
+    color: white;
+  }
