@@ -67,7 +67,7 @@ p{
 .card-filter {
     /* max-width: 200px;
     min-width: 118px; */
-    width: 200px;
+    max-width: 200px;
     height: 80px;
     font-size: 12px;
     display: flex;
@@ -129,7 +129,7 @@ button {
 } */
 
 /* Define classes for different status colors */
-/* .completed-status {
+.completed-status {
     background-color: #4caf50; 
     color: white;
     
@@ -143,17 +143,17 @@ button {
   .pending-status {
     background-color: #f44336; 
     color: white;
-  } */
+  }
 
 
 
   /* Define classes for different status colors */
-/* ::ng-deep .completed-status mat-chip {
+::ng-deep .completed-status mat-chip {
     background-color: #4caf50; 
     color: white;
   }
   
-  .inprogress-status mat-chip {
+  ::ng-deep .inprogress-status mat-chip {
     background-color: #ff9800; 
     color: white;
   }
@@ -161,8 +161,5 @@ button {
   ::ng-deep .pending-status mat-chip {
     background-color: #f44336; 
     color: white;
-  } */
-  ::ng-deep .mat-chip-completed-status  {
-    background-color: #4caf50; 
-    color: white;
   }
+ 
